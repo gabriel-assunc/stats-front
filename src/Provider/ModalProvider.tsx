@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { ReactNode, createContext } from "react"
 import useModal, { ContentType } from "../Hooks/useModal"
 import Modal from "@/Common/Modal/Modal"

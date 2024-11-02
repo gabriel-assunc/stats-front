@@ -45,7 +45,11 @@ const LolStatsBothTeam = ({
     }, [botTeamStats])
 
     return !!topTeamStatsAverage && !!botTeamStatsAverage && <div className={bothTeamDisplay()}>
-        <GeralStatComponent team={topTeam} teamStatAverage={topTeamStatsAverage.geral} keyToInvalidate={topTeamKeyToInvalidate} />
+        <GeralStatComponent 
+        team={topTeam} 
+        teamStatAverage={topTeamStatsAverage.geral}
+        teamStats={topTeamStats}
+        keyToInvalidate={topTeamKeyToInvalidate} />
 
 
         <WinLossStatsComponent
@@ -74,7 +78,11 @@ const LolStatsBothTeam = ({
             lossTeamStatsAverage={topTeamStatsAverage.loss}
         />
 
-        <GeralStatComponent team={botTeam} teamStatAverage={botTeamStatsAverage.geral} keyToInvalidate={botTeamKeyToInvalidate} />
+        <GeralStatComponent 
+        team={botTeam} 
+        teamStatAverage={botTeamStatsAverage.geral}
+        teamStats={botTeamStats}
+        keyToInvalidate={botTeamKeyToInvalidate} />
     </div >
 }
 

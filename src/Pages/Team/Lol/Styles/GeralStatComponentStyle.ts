@@ -9,5 +9,5 @@ export const geralStatContainer = tv({
 })
 
 export const labelDisplay = tv({
-    base: 'z-10 flex flex-row items-center space-x-2 relative left-2'
+    base: 'flex flex-row items-center space-x-2 relative left-2'
 })

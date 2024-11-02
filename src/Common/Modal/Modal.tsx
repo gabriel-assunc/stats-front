@@ -1,4 +1,4 @@
-'use content'
+'use client'
 import { useContext } from "react"
 import { ModalContext } from '../../Provider/ModalProvider'
 import ReactDOM from "react-dom"
@@ -12,11 +12,7 @@ import {
 } from "./ModalStyle"
 
 const Modal = () => {
-    const { open, content, handleModal } = useContext(ModalContext)
-
-    const closeModal = () => {
-        handleModal && handleModal()
-    }
+    const { open, content, closeModal } = useContext(ModalContext)
 
     return open && ReactDOM.createPortal(
         <div className={modalBackground()}>
