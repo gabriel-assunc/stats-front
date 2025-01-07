@@ -1,8 +1,8 @@
 import Table from "@/Common/Table/Table"
-import { LolStatsType } from "@/Entities/LolStats"
+import { teamStats } from "@/Hooks/Lol/useCalculateGameStat"
 
 interface LolStatsTableProps {
-    data: LolStatsType[] | undefined
+    data: teamStats[] | undefined
 }
 
 const LolStatsTable = ({ data }: LolStatsTableProps) => {

@@ -5,11 +5,12 @@ import { updateTeamPlayers } from "@/Api/Scraper/ScraperActions"
 import Label from "@/Common/Label/Label"
 import { geralStatContainer, geralStyleDisplay, labelDisplay } from "./Styles/GeralStatComponentStyle"
 import MoreDetailsButton from "./MoreDetailsButton/MoreDetailsButton"
+import { teamStats } from "@/Hooks/Lol/useCalculateGameStat"
 
 interface GeralStatComponentProps {
     team: { id: string, name: string },
     teamStatAverage: LolStatsAverageType,
-    teamStats?: LolStatsType[],
+    teamStats?: teamStats[],
     keyToInvalidate: string
 }
 

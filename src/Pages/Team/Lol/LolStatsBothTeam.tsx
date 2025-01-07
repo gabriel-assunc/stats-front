@@ -1,6 +1,6 @@
 'use client'
 
-import useCalculateLolStat from "@/Hooks/Lol/useCalculateGameStat"
+import useCalculateLolStat, { teamStats } from "@/Hooks/Lol/useCalculateGameStat"
 import { LolStatsAverageType, LolStatsType } from "@/Entities/LolStats"
 import { useEffect, useState } from "react"
 import GeralStatComponent from "./GeralStatComponent"
@@ -16,8 +16,8 @@ interface TeamAverageStat {
 interface LolStatsBothTeamProps {
     topTeam: { id: string, name: string },
     botTeam: { id: string, name: string },
-    topTeamStats: LolStatsType[],
-    botTeamStats: LolStatsType[],
+    topTeamStats: teamStats[],
+    botTeamStats: teamStats[],
     topTeamKeyToInvalidate: string,
     botTeamKeyToInvalidate: string
 }
@@ -45,12 +45,11 @@ const LolStatsBothTeam = ({
     }, [botTeamStats])
 
     return !!topTeamStatsAverage && !!botTeamStatsAverage && <div className={bothTeamDisplay()}>
-        <GeralStatComponent 
-        team={topTeam} 
-        teamStatAverage={topTeamStatsAverage.geral}
-        teamStats={topTeamStats}
-        keyToInvalidate={topTeamKeyToInvalidate} />
-
+        <GeralStatComponent
+            team={topTeam}
+            teamStatAverage={topTeamStatsAverage.geral}
+            teamStats={topTeamStats}
+            keyToInvalidate={topTeamKeyToInvalidate} />
 
         <WinLossStatsComponent
             teamWin={{
@@ -78,11 +77,11 @@ const LolStatsBothTeam = ({
             lossTeamStatsAverage={topTeamStatsAverage.loss}
         />
 
-        <GeralStatComponent 
-        team={botTeam} 
-        teamStatAverage={botTeamStatsAverage.geral}
-        teamStats={botTeamStats}
-        keyToInvalidate={botTeamKeyToInvalidate} />
+        <GeralStatComponent
+            team={botTeam}
+            teamStatAverage={botTeamStatsAverage.geral}
+            teamStats={botTeamStats}
+            keyToInvalidate={botTeamKeyToInvalidate} />
     </div >
 }
 

@@ -1,5 +1,10 @@
 import { LolStatsAverageType, LolStatsType } from "@/Entities/LolStats"
 
+export interface teamStats {
+    teamStats: LolStatsType,
+    opponent: LolStatsType
+}
+
 const useCalculateLolStat = () => {
     const calculateStat = (data: LolStatsType[], filter?: (data: any) => boolean) => {
         if (filter) data = data.filter(filter)
@@ -18,15 +23,15 @@ const useCalculateLolStat = () => {
             winTotal: 0
         } as LolStatsAverageType
         for (let i in data) {
-            lolAverageStat.dragons += data[i].dragons
-            lolAverageStat.baron += data[i].baron
-            lolAverageStat.kills += data[i].kills
-            lolAverageStat.voids += data[i].voids
-            lolAverageStat.towers += data[i].towers
-            lolAverageStat.gold += data[i].gold
-            lolAverageStat.firstBlood += data[i].firstBlood ? 1 : 0
-            lolAverageStat.firstBrick += data[i].firstBrick ? 1 : 0
-            lolAverageStat.win += data[i].win ? 1 : 0
+            lolAverageStat.dragons += data[i]?.dragons
+            lolAverageStat.baron += data[i]?.baron
+            lolAverageStat.kills += data[i]?.kills
+            lolAverageStat.voids += data[i]?.voids
+            lolAverageStat.towers += data[i]?.towers
+            lolAverageStat.gold += data[i]?.gold
+            lolAverageStat.firstBlood += data[i]?.firstBlood ? 1 : 0
+            lolAverageStat.firstBrick += data[i]?.firstBrick ? 1 : 0
+            lolAverageStat.win += data[i]?.win ? 1 : 0
         }
 
         return {
@@ -45,11 +50,13 @@ const useCalculateLolStat = () => {
         }
     }
 
-    const calculateAverage = (data: LolStatsType[]) => {
+    const calculateAverage = (data: teamStats[]) => {
+        const teamStatData = data.map(({ teamStats }) => teamStats)
+        console.log(teamStatData)
         return {
-            geral: calculateStat(data),
-            win: calculateStat(data, (data) => data.win),
-            loss: calculateStat(data, (data) => !data.win)
+            geral: calculateStat(teamStatData),
+            win: calculateStat(teamStatData, (data) => data?.win),
+            loss: calculateStat(teamStatData, (data) => !data?.win)
         }
     }
 

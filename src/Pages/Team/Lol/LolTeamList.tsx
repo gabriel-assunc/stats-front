@@ -9,16 +9,16 @@ import LolStatsBothTeam from "./LolStatsBothTeam"
 import UpdateButton from "@/Common/Button/Update/Update"
 import SelectLolTeamComponent from "./SelectLolTeamComponent"
 import LolStatContainer from "./LolStatsContainer"
-import { LolStatsType } from "@/Entities/LolStats"
 import MapFilter from "./MapFilter"
 import { LolTeamListDisplay, mapContainer, selectTeamContainer, teamStatContainer } from "./Styles/LolTeamListStyle"
+import { teamStats } from "@/Hooks/Lol/useCalculateGameStat"
 
 const LolTeamList = () => {
     const params = usePathname() || ''
     const [topTeam, setTopTeam] = useState({ id: '', name: '' })
     const [botTeam, setBotTeam] = useState({ id: '', name: '' })
-    const [topTeamStatsSelected, setTopTeamStatsSelected] = useState<LolStatsType[]>([])
-    const [botTeamStatsSelected, setBotTeamStatsSelected] = useState<LolStatsType[]>([])
+    const [topTeamStatsSelected, setTopTeamStatsSelected] = useState<teamStats[]>([])
+    const [botTeamStatsSelected, setBotTeamStatsSelected] = useState<teamStats[]>([])
 
     const SelectItem = (team: any, setState: any) => {
         setState({ id: team.id, name: team.name })
@@ -27,13 +27,15 @@ const LolTeamList = () => {
     const { data: topTeamStats, refetch: refetchTopTeam } = useQuery({
         queryFn: () => getTeamStats(topTeam.id),
         queryKey: ['top_team'],
-        staleTime: Infinity
+        staleTime: Infinity,
+        initialData: [] as teamStats[]
     })
 
     const { data: botTeamStats, refetch: refetchBotTeam } = useQuery({
         queryFn: () => getTeamStats(botTeam.id),
         queryKey: ['bot_team'],
-        staleTime: Infinity
+        staleTime: Infinity,
+        initialData: [] as teamStats[]
     })
 
     useEffect(() => {
@@ -45,16 +47,16 @@ const LolTeamList = () => {
     }, [botTeam])
 
     useEffect(() => {
-        setTopTeamStatsSelected(topTeamStats || [])
+        setTopTeamStatsSelected(topTeamStats)
     }, [topTeamStats])
 
     useEffect(() => {
-        setBotTeamStatsSelected(botTeamStats || [])
+        setBotTeamStatsSelected(botTeamStats)
     }, [botTeamStats])
 
     const filterGames = (gameNumber = '') => {
-        setTopTeamStatsSelected(topTeamStats?.filter(game => game?.game.includes(gameNumber)) || [])
-        setBotTeamStatsSelected(botTeamStats?.filter(game => game?.game.includes(gameNumber)) || [])
+        setTopTeamStatsSelected(topTeamStats.filter(({ teamStats }) => teamStats.game.includes(gameNumber)))
+        setBotTeamStatsSelected(botTeamStats.filter(({ teamStats }) => teamStats.game.includes(gameNumber)))
     }
 
     const selectedBothTeam = () => !!topTeam.id && !!botTeam.id
