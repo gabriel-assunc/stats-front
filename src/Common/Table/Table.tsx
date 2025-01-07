@@ -5,20 +5,23 @@ import { flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } fro
 import { useState } from "react"
 import TableFoot from "./TableFoot"
 import { headerItemStyle, itemRowStyle, tableBodyStyle, tableDisplay, tableHeaderStyle, tableStyle } from "./Style/Table"
+import { teamStats } from "@/Hooks/Lol/useCalculateGameStat"
 
 interface TableProps {
     columns: columnsDefProps[],
-    data: LolStatsType[] | undefined
+    data: teamStats[] | undefined
 }
 
 const Table = ({ columns, data }: TableProps) => {
     const lolStatsColumns = useColumnDef(columns)
-
-    const [teamData, ] = useState(data || [{}])
+    const teamStats = data?.map(({ teamStats }) => teamStats)
+    const [teamData,] = useState(teamStats || [{}])
 
     const table = useReactTable({
         defaultColumn: {
-
+            enableResizing: false,
+            minSize:1,
+            maxSize:10
         },
         columns: lolStatsColumns,
         data: teamData,

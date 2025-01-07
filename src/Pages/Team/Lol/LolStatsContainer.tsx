@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import LolStatItemContainer from "./LolStatItemContainer"
-import useCalculateLolStat from "@/Hooks/Lol/useCalculateGameStat"
+import useCalculateLolStat, { teamStats } from "@/Hooks/Lol/useCalculateGameStat"
 import { LolStatsAverageType, LolStatsType } from "@/Entities/LolStats"
 import Label from "@/Common/Label/Label"
 import UpdateButton from "@/Common/Button/Update/Update"
@@ -11,7 +11,7 @@ import { labelContainer, statsContainer, statsDisplay } from "./Styles/LolStatsC
 import MoreDetailsButton from "./MoreDetailsButton/MoreDetailsButton"
 
 interface LolStatContainerProps {
-    teamStats?: LolStatsType[],
+    teamStats?: teamStats[],
     team: { id: string, name: string },
     keyToInvalidate?: string
 }

@@ -21,5 +21,5 @@ export const headerItemStyle = tv({
 })
 
 export const itemRowStyle = tv({
-    base: "even:bg-slate-300 w-[6%] h-[10%]"
+    base: "even:bg-slate-300 w-[6%] h-[10%] border-solid"
 })

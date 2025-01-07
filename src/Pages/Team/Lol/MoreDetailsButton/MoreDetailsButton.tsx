@@ -1,14 +1,14 @@
 "use client"
 import Button from "@/Common/Button/Button";
 import { updateStyle } from "@/Common/Button/Update/UpdateStyle";
-import { LolStatsType } from "@/Entities/LolStats";
 import { BsCardList } from "react-icons/bs";
 import LolStatsTable from "./LolStatsTable";
 import { useContext } from "react";
 import { ModalContext } from "@/Provider/ModalProvider";
+import { teamStats } from "@/Hooks/Lol/useCalculateGameStat";
 
 interface MoreDetailsButtonProps {
-    gameData: LolStatsType[] | undefined,
+    gameData: teamStats[] | undefined,
     teamName: string,
 }
 
